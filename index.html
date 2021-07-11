@@ -1,0 +1,280 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="Access-Control-Allow-Origin" content="*" />
+<style>
+	body{
+		background: url("https://bing.ioliu.cn/v1/rand?w=1920&h=1200"); /*<default-image-location>*/
+		margin: 0px;
+		/* random image api */
+		/*
+			1.https://bing.ioliu.cn/v1/rand?w=1920&h=1200
+			2.http://www.dmoe.cc/random.php
+			3.https://img.xjh.me/random_img.php
+			4.https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images
+			5.https://api.mtyqx.cn/api/random.php
+			6.https://source.unsplash.com/random
+			7.https://api.isoyu.com/bing_images.php
+			8.https://api.ixiaowai.cn/api/api.php（二次元动漫）
+			https://api.ixiaowai.cn/mcapi/mcapi.php（mc酱动漫）
+			https://api.ixiaowai.cn/gqapi/gqapi.php（高清壁纸）
+			9.https://img.paulzzh.tech/touhou/random
+			10.set : (https://api.dongmanxingkong.com/suijitupian.html)
+			https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php
+			11.ser : (https://www.eee.dog/tech/rand-pic-api.html)
+			https://api.yimian.xyz/img
+			12.https://acg.toubiec.cn/random.php
+			13.https://img.paulzzh.tech/
+
+			old one: https://zh.cppreference.com/mwiki/index.php?search=
+		*/
+		/*
+			var back = document.querySelector("body");
+			back.style.background = "url();";
+		*/
+		
+	}
+	#layer{
+		height: 100vh;
+		width: 100vw;
+		background: url("https://api.ixiaowai.cn/gqapi/gqapi.php");/*<random-image-online-url>*/
+	}
+	form{
+		margin:10px;
+		border-radius:25px;
+		border-style: dashed;
+		float: left;
+		background-color: rgba(102, 204, 255, 0.34);
+		align-self: center;
+		text-align: left;
+		font-size: 20px;
+		font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace";
+		height: auto;
+		width: auto;
+	}
+	fieldset{
+		border-radius:25px;
+	}
+	input{
+    		font-size: 20px;	
+ 	 }
+	button{
+		font-size: 20px;	
+		width: 130px;
+	}
+	legend{
+		font-size: 24px;
+	}
+	#exts{
+		border-radius:25px;
+		border-style: dashed;
+		margin: 20px;
+		text-align: center;
+		float : right;
+		width: 0px;
+		background-color: rgba(102, 204, 255, 0.34);
+	}
+	button.exts_button{
+		/*width: 130px;*/
+		margin: 2px;
+	}
+	
+	#signature{
+		position: absolute;
+		bottom:0px;
+		right:0px;
+		color: rgba(255, 255, 255, 0.3);
+		padding-top: 10px;
+		padding-bottom: 10px;
+		padding-left: 20px;
+		padding-right: 10px;
+		/*content: url("https://api.ixiaowai.cn/api/ylapi.php");*/
+	}
+</style>
+<title>NAVIgator</title>
+</head>
+<body>
+<div id="layer">
+	<script>
+		function OpenTab(urlpre,sitename){
+			urlsuf = document.forms["SearchForm"][sitename].value
+			if(sitename == "cpp"){
+				window.open(urlpre + urlsuf+ " site:en.cppreference.com")
+			}else{
+				window.open(urlpre + urlsuf)
+			}
+			window.focus()
+		}
+	</script>
+	<script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+	<script>
+		/*these two scripts are directly copied from https://www.cnblogs.com/GoodMemoryBlog/p/14279625.html*/
+		L2Dwidget.init({
+			"model": {
+				jsonPath: "https://unpkg.com/live2d-widget-model-z16@1.0.5/assets/z16.model.json", //模型的来源
+				"scale": 1
+			},
+			"display": {
+				"position": "right", //模型的表现位置
+				"width": 150,  //模型的宽度
+				"height": 360, //模型的高度
+				"hOffset": 0,
+				"vOffset": -20
+			},
+			"mobile": {
+				"show": true,
+				"scale": 0.5
+			},
+			"react": {
+				"opacityDefault": 1.0,  //模型默认透明度
+				"opacityOnHover": 0.2
+			}
+		});
+	</script>
+	<script>
+		fetch('https://v1.hitokoto.cn/?c=i', {
+			method: 'GET',
+			headers: {
+				//<?php
+				//header("Access-Control-Allow-Origin: *");
+				//?>
+				//'Access-Control-Allow-Origin': '*'
+			},
+			mode: 'cors',
+			}).then(response => response.json())
+			.then(data => {
+				var content = data.hitokoto
+				var sign = document.getElementById("signature")
+				sign.innerHTML = "  " + content
+				sign.style.background = "rgba(102, 204, 255, 0.85)";
+				sign.style.fontSize = "20px";
+				sign.style.color = "rgba(255, 0, 59, 1.0)";
+				sign.style.borderRadius = "20px";
+				sign.style.letterSpacing = "2px";
+				sign.style.textShadow = "1px 1px 5px red";
+			})
+	</script>
+
+	<form id="SearchForm">
+		<fieldset>
+			<legend>Search Guide</legend>
+			<p> Baidu: </p>
+		 <input type="text" name="baidu" id="test" placeholder="">
+			<button onClick="OpenTab('https://www.baidu.com/s?wd&#61;','baidu')" >Search</button>
+		<br>
+			<p> Bing: </p>
+		 <input type="text" name="bing">
+			<button onClick="OpenTab('https://cn.bing.com/search?q&#61;','bing')" >Search</button>
+		<br>
+			<p> Bilibili: </p>
+			<input type="text" name="bilibili">
+			<button onClick="OpenTab('https://search.bilibili.com/all?keyword&#61;','bilibili')" >Search</button>
+		<br>
+			<p>Zhihu: </p>
+		<input type="text" name="zhihu">
+			<button onClick="OpenTab('https://www.zhihu.com/search?type&#61;content&q&#61;','zhihu')" >Search</button>
+		<br>
+			<p>CppReference: </p>
+		<input type="text" name="cpp" >
+			<button onClick="OpenTab('https://cn.bing.com/search?FORM&#61;HPSBBS&amp;q&#61;','cpp')" >Search</button>
+		<br>
+			<p>CSDN:</p>
+		<input type="text" name="csdn">
+			<button onClick="OpenTab('https://so.csdn.net/so/search?q&#61;','csdn')" >Search</button>
+		<br>
+			<p>Tieba:</p>
+		<input type="text" name="tieba">
+			<button onClick="OpenTab('https://tieba.baidu.com/f?kw&#61;','tieba')" >Enter</button>
+		<br>
+			<p> Moegirl: </p>
+		<input type="text" name="moegirl">
+			<button onClick="OpenTab('https://zh.moegirl.org.cn/index.php?search&#61;','moegirl')" >Search</button>
+		<br>
+		</fieldset>
+	</form>
+	<fieldset id="exts">
+	<button id= "ext1" class="exts_button"  onClick="window.open('https://www.icourse163.org/')">看MOOC</button>
+	<button id= "ext2" class="exts_button"  onClick="window.open('https://fanyi.baidu.com/')">百度翻译</button>
+	<button id= "ext3" class="exts_button"  onClick="window.open('https://fanyi.youdao.com/')">有道翻译</button>
+	</fieldset>
+	<p id="signature">2021. Images are from the Internet.</p>
+</div>
+</body>
+<script>
+	/*
+other live2d models:
+see screenshots at https://www.catct.cn/archives/610.html
+[blueacc open="" title="22娘全身板"]https://cdn.jsdelivr.net/gh/cat2233/live2D/22/model.json[/blueacc]
+
+[greenacc open="" title="33 娘全身版"]https://cdn.jsdelivr.net/gh/cat2233/live2D/22/model.json[/greenacc]
+
+[yellowacc open="" title="凉风青叶Aoba"]https://cdn.jsdelivr.net/gh/cat2233/live2D/aoba/model.json[/yellowacc]
+
+[redacc open="" title="布洛妮娅Bronya"]https://cdn.jsdelivr.net/gh/cat2233/live2D/Bronya/model.json[/redacc]
+
+[purpleacc open="" title="香风智乃chino"]https://cdn.jsdelivr.net/gh/cat2233/live2D/chino/model.json[/purpleacc]
+
+[blueacc open="" title="茵蒂克丝index"]https://cdn.jsdelivr.net/gh/cat2233/live2D/index/model.json[/blueacc]
+
+[greenacc open="" title="康娜Kanna"]https://cdn.jsdelivr.net/gh/cat2233/live2D/Kanna/model.json[/greenacc]
+
+[yellowacc open="" title="koharu"]https://cdn.jsdelivr.net/gh/cat2233/live2D/koharu/model.json[/yellowacc]
+
+[redacc open="" title="时崎狂三Kurumi"]https://cdn.jsdelivr.net/gh/cat2233/live2D/Kurumi/model.json[/redacc]
+
+[purpleacc open="" title="鹿目圆madoka"]https://cdn.jsdelivr.net/gh/cat2233/live2D/madoka/model.json[/purpleacc]
+
+[blueacc open="" title="雷电芽衣Mei"]https://cdn.jsdelivr.net/gh/cat2233/live2D/Mei/model.json[/blueacc]
+
+[greenacc open="" title="从云Murakumo"]https://cdn.jsdelivr.net/gh/cat2233/live2D/Murakumo/model.json[/greenacc]
+
+[yellowacc open="" title="涅普迪努neptune"]https://cdn.jsdelivr.net/gh/cat2233/live2D/neptune/model.json[/yellowacc]
+
+[redacc open="" title="血小板Platelet"]https://cdn.jsdelivr.net/gh/cat2233/live2D/Platelet/model.json[/redacc]
+
+[purpleacc open="" title="血小板2Platelet2"]https://cdn.jsdelivr.net/gh/cat2233/live2D/Platelet2/model.json[/purpleacc]
+
+[blueacc open="" title="雷姆Rem"]https://cdn.jsdelivr.net/gh/cat2233/live2D/Rem/model.json[/blueacc]
+
+[greenacc open="" title="和泉纱雾Sagiri"]https://cdn.jsdelivr.net/gh/cat2233/live2D/Sagiri/model.json[/greenacc]
+
+[yellowacc open="" title="2017 雪初音snow_miku"]https://cdn.jsdelivr.net/gh/cat2233/live2D/snow_miku/model.json[/yellowacc]
+
+[redacc open="" title="小埋Umaru"]https://cdn.jsdelivr.net/gh/cat2233/live2D/Umaru/model.json[/redacc]
+
+[purpleacc open="" title="不知名的UU"]https://cdn.jsdelivr.net/gh/cat2233/live2D/uu/model.json[/purpleacc]
+
+[blueacc open="" title="尤莉yuri"]https://cdn.jsdelivr.net/gh/cat2233/live2D/yuri/model.json[/blueacc]
+
+[greenacc open="" title="chitose"]https://unpkg.com/live2d-widget-model-chitose@1.0.5/assets/chitose.model.json[/greenacc]
+
+[yellowacc open="" title="haruto"]https://unpkg.com/live2d-widget-model-haruto@1.0.5/assets/haruto.model.json [/yellowacc]
+
+[redacc open="" title="hibiki"]https://unpkg.com/live2d-widget-model-hibiki@1.0.5/assets/hibiki.model.json[/redacc]
+
+[purpleacc open="" title="hijiki"]https://unpkg.com/live2d-widget-model-hijiki@1.0.5/assets/hijiki.model.json[/purpleacc]
+
+[blueacc open="" title="izumi"]https://unpkg.com/live2d-widget-model-izumi@1.0.5/assets/izumi.model.json[/blueacc]
+
+[greenacc open="" title="koharu"]https://unpkg.com/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json[/greenacc]
+
+[yellowacc open="" title="nico"]https://unpkg.com/live2d-widget-model-nico@1.0.5/assets/nico.model.json[/yellowacc]
+
+[redacc open="" title="nipsilon"]https://unpkg.com/live2d-widget-model-nipsilon@1.0.5/assets/nipsilon.model.json[/redacc]
+
+[purpleacc open="" title="nito"]https://unpkg.com/live2d-widget-model-nito@1.0.5/assets/nito.model.json[/purpleacc]
+
+[purpleacc open="" title="tororo"]https://unpkg.com/live2d-widget-model-tororo@1.0.5/assets/tororo.model.json[/purpleacc]
+
+[blueacc open="" title="tsumiki"]https://unpkg.com/live2d-widget-model-tsumiki@1.0.5/assets/tsumiki.model.json[/blueacc]
+
+[greenacc open="" title="unitychan"]https://unpkg.com/live2d-widget-model-unitychan@1.0.5/assets/unitychan.model.json[/greenacc]
+
+[yellowacc open="" title="wanko"]https://unpkg.com/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json[/yellowacc]
+
+[redacc open="" title="z16"]https://unpkg.com/live2d-widget-model-z16@1.0.5/assets/z16.model.json[/redacc]
+*/
+
+</script>
+</html>
