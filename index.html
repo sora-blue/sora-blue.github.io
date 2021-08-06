@@ -98,13 +98,23 @@
 <div id="layer">
 	<script>
 		function OpenTab(urlpre,sitename){
-			urlsuf = document.forms["SearchForm"][sitename].value
-			if(sitename == "cpp"){
-				window.open(urlpre + urlsuf+ " site:en.cppreference.com")
-			}else{
-				window.open(urlpre + urlsuf)
+			var urlsuf = document.forms["SearchForm"][sitename].value.toString()
+			var tmp = ""
+			for(var i = 0 ; i < urlsuf.length ; ++i)
+			{
+				if(urlsuf[i] != '+')
+				{
+					tmp = tmp + urlsuf[i]
+				}else
+				{
+					tmp = tmp + "%2B"
+				}
 			}
-			window.focus()
+			var url = urlpre + tmp
+			if(sitename == "cpp"){
+				url = url + " site:en.cppreference.com"
+			}
+			location.assign(url)
 		}
 	</script>
 	<script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
