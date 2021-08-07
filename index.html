@@ -169,6 +169,10 @@
 	<form id="SearchForm">
 		<fieldset>
 			<legend>Search Guide</legend>
+			<p>Google:</p>
+		<input type="text" name="google">
+			<button onClick="OpenTab('https://www.google.com/search?q&#61;','google')"  type="button">Search</button>
+		<br>
 			<p> Baidu: </p>
 		 <input type="text" name="baidu" id="test" placeholder="">
 			<button onClick="OpenTab('https://www.baidu.com/s?wd&#61;','baidu')" type="button">Search</button>
@@ -192,6 +196,11 @@
 			<p>CSDN:</p>
 		<input type="text" name="csdn">
 			<button onClick="OpenTab('https://so.csdn.net/so/search?q&#61;','csdn')"  type="button">Search</button>
+		<br>
+			<p>StackOverflow:</p>
+		<input type="text" name="stack">
+			<button onClick="OpenTab('https://stackoverflow.com/search?q&#61;','stack')"  type="button">Search</button>
+		<br>
 			<p> Moegirl: </p>
 		<input type="text" name="moegirl">
 			<button onClick="OpenTab('https://zh.moegirl.org.cn/index.php?search&#61;','moegirl')"  type="button">Search</button>
