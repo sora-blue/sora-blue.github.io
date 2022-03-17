@@ -82,13 +82,10 @@
 	
 	#signature{
 		position: absolute;
-		bottom:0px;
-		right:0px;
+		bottom: 0;
+		right: 0;
 		color: rgba(255, 255, 255, 0.3);
-		padding-top: 10px;
-		padding-bottom: 10px;
-		padding-left: 20px;
-		padding-right: 10px;
+		padding: 10px 10px 10px 20px;
 		/*content: url("https://api.ixiaowai.cn/api/ylapi.php");*/
 	}
 </style>
@@ -146,10 +143,6 @@
 		fetch('https://v1.hitokoto.cn/?c=i', {
 			method: 'GET',
 			headers: {
-				//<?php
-				//header("Access-Control-Allow-Origin: *");
-				//?>
-				//'Access-Control-Allow-Origin': '*'
 			},
 			mode: 'cors',
 			}).then(response => response.json())
@@ -159,10 +152,10 @@
 				sign.innerHTML = "  " + content
 				sign.style.background = "rgba(102, 204, 255, 0.85)";
 				sign.style.fontSize = "20px";
-				sign.style.color = "rgba(255, 0, 59, 1.0)";
+				sign.style.color = "rgba(255, 255, 255, 1.0)";
 				sign.style.borderRadius = "20px";
 				sign.style.letterSpacing = "2px";
-				sign.style.textShadow = "1px 1px 5px red";
+				sign.style.textShadow = "1px 1px 5px black";
 			})
 	</script>
 
