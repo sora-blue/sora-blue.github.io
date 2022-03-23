@@ -1,114 +1,113 @@
 <!doctype html>
-<html>
+<html lang="ch">
 <head>
 	<meta charset="utf-8"/>
-	<meta http-equiv="Access-Control-Allow-Origin" content="*" />
-<style>
-	body{
-		background: url("https://bing.ioliu.cn/v1/rand?w=1920&h=1200"); /*<default-image-location>*/
-		margin: 0px;
-		/* random image api */
-		/*
-			1.https://bing.ioliu.cn/v1/rand?w=1920&h=1200
-			2.http://www.dmoe.cc/random.php
-			3.https://img.xjh.me/random_img.php
-			4.https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images
-			5.https://api.mtyqx.cn/api/random.php
-			6.https://source.unsplash.com/random
-			7.https://api.isoyu.com/bing_images.php
-			8.https://api.ixiaowai.cn/api/api.php（二次元动漫）
-			https://api.ixiaowai.cn/mcapi/mcapi.php（mc酱动漫）
-			https://api.ixiaowai.cn/gqapi/gqapi.php（高清壁纸）
-			9.https://img.paulzzh.tech/touhou/random
-			10.set : (https://api.dongmanxingkong.com/suijitupian.html)
-			https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php
-			11.ser : (https://www.eee.dog/tech/rand-pic-api.html)
-			https://api.yimian.xyz/img
-			12.https://acg.toubiec.cn/random.php
-			13.https://img.paulzzh.tech/
+	<style>
+		body{
+			background: url("https://bing.ioliu.cn/v1/rand?w=1920&h=1200"); /*<default-image-location>*/
+			margin: 0;
+			/* random image api */
+			/*
+                1.https://bing.ioliu.cn/v1/rand?w=1920&h=1200
+                2.http://www.dmoe.cc/random.php
+                3.https://img.xjh.me/random_img.php
+                4.https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images
+                5.https://api.mtyqx.cn/api/random.php
+                6.https://source.unsplash.com/random
+                7.https://api.isoyu.com/bing_images.php
+                8.https://api.ixiaowai.cn/api/api.php（二次元动漫）
+                https://api.ixiaowai.cn/mcapi/mcapi.php（mc酱动漫）
+                https://api.ixiaowai.cn/gqapi/gqapi.php（高清壁纸）
+                9.https://img.paulzzh.tech/touhou/random
+                10.set : (https://api.dongmanxingkong.com/suijitupian.html)
+                https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php
+                11.ser : (https://www.eee.dog/tech/rand-pic-api.html)
+                https://api.yimian.xyz/img
+                12.https://acg.toubiec.cn/random.php
+                13.https://img.paulzzh.tech/
 
-			old one: https://zh.cppreference.com/mwiki/index.php?search=
-		*/
-		/*
-			var back = document.querySelector("body");
-			back.style.background = "url();";
-		*/
-		
-	}
-	#layer{
-		height: 100vh;
-		width: 100vw;
-		background: url("https://api.ixiaowai.cn/gqapi/gqapi.php");/*<random-image-online-url>*/
-	}
-	form{
-		margin:10px;
-		border-radius:25px;
-		border-style: dashed;
-		float: left;
-		background-color: rgba(102, 204, 255, 0.34);
-		align-self: center;
-		text-align: left;
-		font-size: 20px;
-		font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace";
-		height: auto;
-		width: auto;
-	}
-	fieldset{
-		border-radius:25px;
-	}
-	input{
-    		font-size: 20px;	
- 	 }
-	button{
-		font-size: 20px;	
-		width: 130px;
-	}
-	legend{
-		font-size: 24px;
-	}
-	#exts{
-		border-radius:25px;
-		border-style: dashed;
-		margin: 20px;
-		text-align: center;
-		float : right;
-		width: 0px;
-		background-color: rgba(102, 204, 255, 0.34);
-	}
-	button.exts_button{
-		/*width: 130px;*/
-		margin: 2px;
-	}
-	
-	#signature{
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		color: rgba(255, 255, 255, 0.3);
-		padding: 10px 10px 10px 20px;
-		/*content: url("https://api.ixiaowai.cn/api/ylapi.php");*/
-	}
-</style>
-<title>NAVIgator</title>
+                old one: https://zh.cppreference.com/mwiki/index.php?search=
+            */
+			/*
+                var back = document.querySelector("body");
+                back.style.background = "url();";
+            */
+
+		}
+		#layer{
+			height: 100vh;
+			width: 100vw;
+			background: url("https://api.ixiaowai.cn/gqapi/gqapi.php");/*<random-image-online-url>*/
+		}
+		form{
+			margin:10px;
+			border-radius:25px;
+			border-style: dashed;
+			float: left;
+			background-color: rgba(102, 204, 255, 0.34);
+			align-self: center;
+			text-align: left;
+			font-size: 20px;
+			font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace";
+			height: auto;
+			width: auto;
+		}
+		fieldset{
+			border-radius:25px;
+		}
+		input{
+			font-size: 20px;
+		}
+		button{
+			font-size: 20px;
+			width: 130px;
+		}
+		legend{
+			font-size: 24px;
+		}
+		#exts{
+			border-radius:25px;
+			border-style: dashed;
+			margin: 20px;
+			text-align: center;
+			float : right;
+			width: 0;
+			background-color: rgba(102, 204, 255, 0.34);
+		}
+		button.exts_button{
+			/*width: 130px;*/
+			margin: 2px;
+		}
+
+		#signature{
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			color: rgba(255, 255, 255, 0.3);
+			padding: 10px 10px 10px 20px;
+			/*content: url("https://api.ixiaowai.cn/api/ylapi.php");*/
+		}
+	</style>
+	<title>NAVIgator</title>
 </head>
 <body>
 <div id="layer">
 	<script>
-		function OpenTab(urlpre,sitename){
-			var urlsuf = document.forms["SearchForm"][sitename].value.toString()
-			var tmp = ""
-			for(var i = 0 ; i < urlsuf.length ; ++i)
+		function OpenTab(urlPre,siteName){
+			const urlSuf = document.forms["SearchForm"][siteName].value.toString();
+			let tmp = ""
+			for(let i = 0 ; i < urlSuf.length ; ++i)
 			{
-				if(urlsuf[i] != '+')
+				if(urlSuf[i] !== '+')
 				{
-					tmp = tmp + urlsuf[i]
+					tmp = tmp + urlSuf[i]
 				}else
 				{
 					tmp = tmp + "%2B"
 				}
 			}
-			var url = urlpre + tmp
-			if(sitename == "cpp"){
+			let url = urlPre + tmp
+			if(siteName === "cpp"){
 				url = url + " site:en.cppreference.com"
 			}
 			location.assign(url)
@@ -145,67 +144,69 @@
 			headers: {
 			},
 			mode: 'cors',
-			}).then(response => response.json())
-			.then(data => {
-				var content = data.hitokoto
-				var sign = document.getElementById("signature")
-				sign.innerHTML = "  " + content
-				sign.style.background = "rgba(102, 204, 255, 0.85)";
-				sign.style.fontSize = "20px";
-				sign.style.color = "rgba(255, 255, 255, 1.0)";
-				sign.style.borderRadius = "20px";
-				sign.style.letterSpacing = "2px";
-				sign.style.textShadow = "1px 1px 5px black";
-			})
+		}).then(response => response.json())
+				.then(data => {
+					const content = data.hitokoto;
+					const sign = document.getElementById("signature");
+					sign.innerHTML = "  " + content
+					sign.style.background = "rgba(102, 204, 255, 0.85)";
+					sign.style.fontSize = "20px";
+					sign.style.color = "rgba(255, 255, 255, 1.0)";
+					sign.style.borderRadius = "20px";
+					sign.style.letterSpacing = "2px";
+					sign.style.textShadow = "1px 1px 5px black";
+				})
 	</script>
 
 	<form id="SearchForm">
 		<fieldset>
 			<legend>Search Guide</legend>
 			<p>Google:</p>
-		<input type="text" name="google">
+			<input type="text" name="google">
 			<button onClick="OpenTab('https://www.google.com/search?q&#61;','google')"  type="button">Search</button>
-		<br>
+			<br>
 			<p> Baidu: </p>
-		 <input type="text" name="baidu" id="test" placeholder="">
+			<input type="text" name="baidu" id="test" placeholder="">
 			<button onClick="OpenTab('https://www.baidu.com/s?wd&#61;','baidu')" type="button">Search</button>
-		<br>
+			<br>
 			<p> Bing: </p>
-		 <input type="text" name="bing">
+			<input type="text" name="bing">
 			<button onClick="OpenTab('https://cn.bing.com/search?q&#61;','bing')"  type="button">Search</button>
-		<br>
+			<br>
 			<p> Bilibili: </p>
 			<input type="text" name="bilibili">
 			<button onClick="OpenTab('https://search.bilibili.com/all?keyword&#61;','bilibili')"  type="button">Search</button>
-		<br>
+			<br>
 			<p>Zhihu: </p>
-		<input type="text" name="zhihu">
+			<input type="text" name="zhihu">
 			<button onClick="OpenTab('https://www.zhihu.com/search?type&#61;content&q&#61;','zhihu')"  type="button">Search</button>
-		<br>
+			<br>
 			<p>CppReference: </p>
-		<input type="text" name="cpp" >
+			<input type="text" name="cpp" >
 			<button onClick="OpenTab('https://cn.bing.com/search?FORM&#61;HPSBBS&amp;q&#61;','cpp')"  type="button">Search</button>
-		<br>
+			<br>
 			<p>CSDN:</p>
-		<input type="text" name="csdn">
+			<input type="text" name="csdn">
 			<button onClick="OpenTab('https://so.csdn.net/so/search?q&#61;','csdn')"  type="button">Search</button>
-		<br>
+			<br>
 			<p>StackOverflow:</p>
-		<input type="text" name="stack">
+			<input type="text" name="stack">
 			<button onClick="OpenTab('https://stackoverflow.com/search?q&#61;','stack')"  type="button">Search</button>
-		<br>
+			<br>
 			<p> Moegirl: </p>
-		<input type="text" name="moegirl">
+			<input type="text" name="moegirl">
 			<button onClick="OpenTab('https://zh.moegirl.org.cn/index.php?search&#61;','moegirl')"  type="button">Search</button>
-		<br>
+			<br>
 		</fieldset>
 	</form>
 	<fieldset id="exts">
-	<button id= "ext1" class="exts_button"  onClick="window.open('https://www.icourse163.org/')">看MOOC</button>
-	<button id= "ext2" class="exts_button"  onClick="window.open('https://fanyi.baidu.com/')">百度翻译</button>
-	<button id= "ext3" class="exts_button"  onClick="window.open('https://fanyi.youdao.com/')">有道翻译</button>
+		<button id= "ext0" class="exts_button"  onClick="window.open('./blog')">My blog</button>
+		<button id= "ext1" class="exts_button"  onClick="window.open('https://www.icourse163.org/')">Netease MOOC</button>
+		<button id= "ext2" class="exts_button"  onClick="window.open('https://fanyi.baidu.com/')">Baidu Translation</button>
+		<button id= "ext3" class="exts_button"  onClick="window.open('https://fanyi.youdao.com/')">Youdao Translation</button>
+		<button id= "ext4" class="exts_button"  onClick="window.open('https://translate.google.com/')">Google Translation</button>
 	</fieldset>
-	<p id="signature">2021. Images are from the Internet.</p>
+	<p id="signature">2022. Images are from api.ixiaowai.cn / bing.ioliu.cn.</p>
 </div>
 </body>
 <script>
