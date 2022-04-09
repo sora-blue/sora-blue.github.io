@@ -110,6 +110,9 @@
 			if(siteName === "cpp"){
 				url = url + " site:en.cppreference.com"
 			}
+			if(siteName === "man7"){
+				url = url + " site:man7.org"
+			}
 			location.assign(url)
 		}
 	</script>
@@ -185,15 +188,15 @@
 			<input type="text" name="cpp" >
 			<button onClick="OpenTab('https://cn.bing.com/search?FORM&#61;HPSBBS&amp;q&#61;','cpp')"  type="button">Search</button>
 			<br>
-			<p>CSDN:</p>
-			<input type="text" name="csdn">
-			<button onClick="OpenTab('https://so.csdn.net/so/search?q&#61;','csdn')"  type="button">Search</button>
-			<br>
 			<p>StackOverflow:</p>
 			<input type="text" name="stack">
 			<button onClick="OpenTab('https://stackoverflow.com/search?q&#61;','stack')"  type="button">Search</button>
 			<br>
-			<p> Moegirl: </p>
+			<p>Man7:</p>
+			<input type="text" name="man7">
+			<button onClick="OpenTab('https://cn.bing.com/search?FORM&#61;HPSBBS&amp;q&#61;,'man7')"  type="button">Search</button>
+			<br>
+			<p>Moegirl: </p>
 			<input type="text" name="moegirl">
 			<button onClick="OpenTab('https://zh.moegirl.org.cn/index.php?search&#61;','moegirl')"  type="button">Search</button>
 			<br>
