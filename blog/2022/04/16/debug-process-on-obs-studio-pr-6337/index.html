@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>debug-process-on-obs-studio-pr-6337 - sora-blue&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    
+    <meta name="description" content="cover image by 邦乔彦,This is my second time contributing to obs studio repo. Last time i seemed too rushand finally it w,"> 
+    <meta name="author" content="sora-blue"> 
+    <link rel="alternative" href="atom.xml" title="sora-blue&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="debug-process-on-obs-studio-pr-6337 - sora-blue&#39;s blog"/>
+    <meta name="twitter:description" content="cover image by 邦乔彦,This is my second time contributing to obs studio repo. Last time i seemed too rushand finally it w,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="sora-blue&#39;s blog"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="debug-process-on-obs-studio-pr-6337 - sora-blue&#39;s blog"/>
+    <meta property="og:description" content="cover image by 邦乔彦,This is my second time contributing to obs studio repo. Last time i seemed too rushand finally it w,"/>
+    
+<link rel="stylesheet" href="/blog/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">sora-blue&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://sora-blue.github.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">debug-process-on-obs-studio-pr-6337</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">debug-process-on-obs-studio-pr-6337</h1>
+        <div class="stuff">
+            <span>四月 16, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/blog/tags/debug/" rel="tag">debug</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/blog/tags/open-source/" rel="tag">open-source</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>This is my second time contributing to obs studio repo. Last time i seemed too rush<br>and finally it was not accepted. This time i modified only one line that fixes the<br>bug, which may have a higher rate of being accepted.<br>It took me two afternoon and a night. During the bug fixing process, the most important<br>things that i learned are what is a good open-source program, how the open-source community<br>is effectively organized, and how to debug industrial strength software. And it also made<br>me understand that <strong>even 1 line</strong> modification may require hard work on the back. Writing<br>code is relatively easy, but writing <strong>meaningful</strong> code is difficult.</p>
+<h1 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h1><p>First i should build the program from source code successfully. Good open-source repos<br>often have a detailed build instruction wiki, which is very helpful for freshbirds like me.</p>
+<p>Then i tried to reproduce the problem described at issue #6145. Then i was circling<br>around my familiar codes at <code>windows-basic-main.cpp</code> which had no fruit. The only<br>way was to <strong>climb up</strong>. That is, to find related functions through call stack with<br>debug tools. </p>
+<p>For example, at this time:</p>
+<p><strong>i want to know what happened when media sources are being deleted with scene source.</strong></p>
+<h3 id="try-0"><a href="#try-0" class="headerlink" title="try 0"></a>try 0</h3><p>Without docs to refer, i find the entrance by searching possibly related function name.<br>First i searched <code>RemoveScene</code>, and i climbed from <code>RemoveSelectedScene</code>, <code>RemoveSceneAndReleaseNested</code>,<br><code>obs_scene_prune_sources</code> to <code>update_transforms_and_prune_sources</code>.<br>And there were no diff when things went normal or abnormal.<br>Seldom did <code>update_transforms_and_prune_sources</code> return anything to <code>obs_scene_prune_sources</code><br>when i was trying to reproduce the problem.</p>
+<h3 id="try-1"><a href="#try-1" class="headerlink" title="try 1"></a>try 1</h3><p>Then i found video rendering functions are calling<br><code>update_transforms_and_prune_sources</code> too, from which i found <code>source_deactivate</code>,<br><code>obs_transition_stop</code>, climbing like below:<br>(It relies on strong functions provided by GDB that allows me to look into<br>call stack when a breakpoint is hit.)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">obs_source_destroy_defer</span><br><span class="line">	-&gt;remove_all_items</span><br><span class="line">		-&gt;obs_sceneitem_release</span><br><span class="line">			-&gt;obs_sceneitem_destroy</span><br><span class="line">				-&gt;obs_source_release</span><br><span class="line">					-&gt;obs_source_destroy</span><br><span class="line">						-&gt;obs_transition_clear</span><br><span class="line">							-&gt; ...</span><br></pre></td></tr></table></figure>
+<h3 id="try-2"><a href="#try-2" class="headerlink" title="try 2"></a>try 2</h3><p>Then i found when the media source sceneitem is removed normally, <code>active_refs</code> and <code>show_refs</code><br>are both 0; when abnormally, they are both 1, which must be causing it to stay in audio mixer.<br>By adding breakpoint at <code>obs_source_deactivate</code>,  I found:</p>
+<blockquote>
+<p>Before removing the scene, if the media source with a stinger transition is included in<br>the current scene only, its <code>active_refs</code> and <code>show_refs</code> are both 2.<br>In normal case, <code>obs_source_deactivate</code> is triggered twice by <code>on_actionRemoveSource_triggered</code><br>and <code>obs_sceneitem_remove</code>(directly or indirectly).<br>In abnormal case that causes problem, the sceneitem removing process is managed by<br><code>obs_source_enum_active_tree</code>, which then calls <code>scene_enum_sources</code>.<br>And at <code>scene_enum_sources</code>, <code>enum_source_active_tree_callback</code> is supposed to be called<br>twice to deal with <strong>media source with show_transition playing</strong>.</p>
+</blockquote>
+<p><img src="https://i.ibb.co/Pz0CzNZ/1.png" alt="debugging"></p>
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>I changed it from <code>else if</code> to <code>if</code>, which provided an extra call with <strong>only 1 line</strong> modifed,<br>and the problem was solved. It was about 00:37 at night. The feeling that i fixed a bug made me<br>obsessed with it. Finally Mr. Weak&#x2F;Freak&#x2F;Idiot managed to do a little thing helpful to others.</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
