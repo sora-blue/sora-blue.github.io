@@ -1,0 +1,5 @@
+ft: 改进长文本框
+
+1. 在SemiDesign的TextArea组件上魔改，调了bing的建议文本api
+2. 调整GitHub Action获取提交信息
+3. 将BingAI添加到默认置顶
